@@ -1,10 +1,26 @@
 
 :root {
-    --primary-color: #ff5722;
-    --secondary-color: #ffc107;
-    --background-color: #f0f0f0;
-    --text-color: #333;
-    --white: #fff;
+    --primary-color: #ff6b35;
+    --secondary-color: #f7c948;
+    --background-color: #f5f4ef;
+    --text-color: #1e1b18;
+    --surface-color: #ffffff;
+    --page-gradient: linear-gradient(135deg, #f2d2b1, #f1e7c6, #d9e8e3, #c8d8f3);
+    --card-shadow: 0 12px 28px rgba(30, 27, 24, 0.12), 0 6px 14px rgba(30, 27, 24, 0.08);
+    --ball-shadow: 0 6px 12px rgba(30, 27, 24, 0.18);
+    --button-shadow: 0 8px 18px rgba(30, 27, 24, 0.18);
+}
+
+[data-theme="dark"] {
+    --primary-color: #ff9f1c;
+    --secondary-color: #2ec4b6;
+    --background-color: #0f1115;
+    --text-color: #eae7e2;
+    --surface-color: #1c2128;
+    --page-gradient: linear-gradient(135deg, #0f1115, #1c2128, #182b3a, #0b1e2b);
+    --card-shadow: 0 18px 38px rgba(5, 7, 10, 0.6), 0 8px 18px rgba(5, 7, 10, 0.4);
+    --ball-shadow: 0 10px 18px rgba(0, 0, 0, 0.45);
+    --button-shadow: 0 10px 20px rgba(0, 0, 0, 0.45);
 }
 
 body {
@@ -16,22 +32,49 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+    background-image: var(--page-gradient);
+    transition: background-color 0.3s ease, color 0.3s ease, background-image 0.6s ease;
 }
 
 .container {
     text-align: center;
     padding: 2rem;
-    background-color: var(--white);
+    background-color: var(--surface-color);
     border-radius: 1rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--card-shadow);
     width: 90%;
     max-width: 500px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-h1 {
-    color: var(--primary-color);
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
     margin-bottom: 1.5rem;
+}
+
+.header h1 {
+    color: var(--primary-color);
+    margin: 0;
+    text-align: left;
+}
+
+#theme-toggle {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 2px solid var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+#theme-toggle:hover {
+    background-color: var(--text-color);
+    color: var(--surface-color);
 }
 
 .lotto-numbers {
@@ -46,28 +89,40 @@ h1 {
     height: 50px;
     border-radius: 50%;
     background-color: var(--secondary-color);
-    color: var(--white);
+    color: var(--surface-color);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--ball-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #generate-btn {
     background-color: var(--primary-color);
-    color: var(--white);
+    color: var(--surface-color);
     border: none;
     padding: 1rem 2rem;
     font-size: 1.2rem;
     border-radius: 0.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--button-shadow);
 }
 
 #generate-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 480px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #theme-toggle {
+        align-self: flex-end;
+    }
 }
