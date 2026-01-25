@@ -21,7 +21,7 @@
       enable = true;
       previews = {
         web = {
-          command = ["python3" "-m" "http.server" "$PORT" "--bind" "0.0.0.0"];
+          command = ["npx" "http-server" "-p" "$PORT" "--cors" "-c-1"];
           manager = "web";
         };
       };
