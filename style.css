@@ -114,6 +114,29 @@ button:disabled {
     color: var(--muted);
 }
 
+.upload {
+    display: grid;
+    gap: 0.5rem;
+    padding: 1rem 1.2rem;
+    border-radius: 18px;
+    border: 1px dashed rgba(29, 26, 21, 0.25);
+    background: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+}
+
+.upload-label {
+    font-weight: 600;
+}
+
+.upload input[type="file"] {
+    font-size: 0.9rem;
+}
+
+.upload-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
 .hero-card {
     background: var(--card);
     border-radius: var(--radius);

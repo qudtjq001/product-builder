@@ -11,6 +11,7 @@ const webcamContainer = document.getElementById("webcam-container");
 const labelContainer = document.getElementById("label-container");
 const statusText = document.getElementById("status-text");
 const resultLabel = document.getElementById("result-label");
+const uploadInput = document.getElementById("image-upload");
 
 function setStatus(text, active) {
     statusText.textContent = text;
@@ -125,5 +126,65 @@ function stop() {
 
 startBtn.addEventListener("click", init);
 stopBtn.addEventListener("click", stop);
+uploadInput.addEventListener("change", async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!model) {
+        try {
+            setStatus("모델 로딩 중...", true);
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+            ensureLabelRows();
+        } catch (error) {
+            console.error(error);
+            setStatus("모델 로딩 실패", false);
+            return;
+        }
+    }
+
+    stop();
+    setStatus("이미지 분석 중...", true);
+    const img = new Image();
+    img.onload = async () => {
+        webcamContainer.innerHTML = "";
+        webcamContainer.appendChild(img);
+        img.style.width = "100%";
+        img.style.height = "auto";
+        await predictImage(img);
+        setStatus("분석 완료", false);
+    };
+    img.onerror = () => {
+        setStatus("이미지를 읽을 수 없습니다.", false);
+    };
+    img.src = URL.createObjectURL(file);
+});
 
 clearLabels();
+
+async function predictImage(imageEl) {
+    const prediction = await model.predict(imageEl);
+    let top = { className: "", probability: 0 };
+
+    prediction.forEach((item, index) => {
+        if (item.probability > top.probability) {
+            top = item;
+        }
+
+        const row = labelContainer.children[index];
+        if (!row) return;
+        const [nameNode, valueNode] = row.querySelectorAll(".label-row span");
+        const bar = row.querySelector(".progress span");
+        const percent = Math.round(item.probability * 100);
+
+        nameNode.textContent = item.className;
+        valueNode.textContent = `${percent}%`;
+        bar.style.width = `${percent}%`;
+    });
+
+    if (top.className) {
+        resultLabel.textContent = `${top.className} ${Math.round(top.probability * 100)}%`;
+    }
+}
