@@ -1,27 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lotto Number Generator</title>
+    <title>제휴 문의 | 파트너십 폼</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Lotto Number Generator</h1>
-            <button id="theme-toggle" type="button" aria-pressed="false">Dark Mode</button>
-        </div>
-        <div class="lotto-numbers">
-            <span class="lotto-ball"></span>
-            <span class="lotto-ball"></span>
-            <span class="lotto-ball"></span>
-            <span class="lotto-ball"></span>
-            <span class="lotto-ball"></span>
-            <span class="lotto-ball"></span>
-        </div>
-        <button id="generate-btn">Generate Numbers</button>
-    </div>
-    <script src="main.js"></script>
+    <main class="page">
+        <section class="hero">
+            <div class="hero-text">
+                <span class="eyebrow">Partnership</span>
+                <h1>함께 성장할 파트너를 찾습니다.</h1>
+                <p class="subtitle">브랜드 제휴, 공동 캠페인, 기술 연동 등 어떤 협업이든 환영합니다. 아래 폼으로 문의를 남겨주시면 2영업일 내로 답변드릴게요.</p>
+                <div class="trust">
+                    <div class="trust-item">
+                        <span class="trust-label">응답 시간</span>
+                        <strong>48시간 이내</strong>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-label">지원 범위</span>
+                        <strong>국내 · 글로벌</strong>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-label">파트너십 유형</span>
+                        <strong>콘텐츠 · 기술 · 공동세일즈</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="form-card">
+                <form action="https://formspree.io/f/mrekayqw" method="POST" class="partner-form">
+                    <div class="form-row">
+                        <label for="name">이름</label>
+                        <input id="name" name="name" type="text" placeholder="홍길동" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="email">이메일</label>
+                        <input id="email" name="email" type="email" placeholder="hello@company.com" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="company">회사 / 팀</label>
+                        <input id="company" name="company" type="text" placeholder="Company Inc.">
+                    </div>
+                    <div class="form-row">
+                        <label for="website">웹사이트</label>
+                        <input id="website" name="website" type="url" placeholder="https://">
+                    </div>
+                    <div class="form-row">
+                        <label for="partnership">제휴 유형</label>
+                        <select id="partnership" name="partnership" required>
+                            <option value="">선택해주세요</option>
+                            <option value="campaign">공동 캠페인</option>
+                            <option value="integration">기술 연동</option>
+                            <option value="reseller">리셀러 / 공동 세일즈</option>
+                            <option value="media">콘텐츠 / 미디어</option>
+                            <option value="other">기타</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label for="message">문의 내용</label>
+                        <textarea id="message" name="message" rows="5" placeholder="협업 목적과 기대하는 성과를 간단히 적어주세요." required></textarea>
+                    </div>
+                    <input type="text" name="_gotcha" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <button type="submit" class="submit-btn">제휴 문의 보내기</button>
+                    <p class="form-note">제출 시 개인정보 수집 및 이용에 동의한 것으로 간주합니다.</p>
+                </form>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
