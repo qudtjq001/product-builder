@@ -15,21 +15,17 @@
             <div class="hero-text">
                 <span class="badge">Teachable Machine</span>
                 <h1>동물상 테스트</h1>
-                <p class="subtitle">웹캠으로 바로 확인하는 강아지상 vs 고양이상. 촬영 버튼을 누르면 모델이 실시간으로 예측해요.</p>
-                <div class="hero-actions">
-                    <button id="start-btn" type="button" class="primary">촬영 시작</button>
-                    <button id="stop-btn" type="button" class="ghost" disabled>멈춤</button>
-                </div>
+                <p class="subtitle">사진을 업로드하면 강아지상 vs 고양이상을 바로 분석해요.</p>
                 <div class="upload">
                     <label class="upload-label" for="image-upload">이미지 업로드</label>
                     <input id="image-upload" type="file" accept="image/*">
                     <span class="upload-note">JPG/PNG 파일을 선택하면 바로 분석합니다.</span>
                 </div>
-                <p class="hint">카메라 권한을 허용해 주세요. 얼굴을 중앙에 맞추면 정확도가 올라갑니다.</p>
+                <p class="hint">정면 얼굴이 잘 보이는 사진일수록 정확도가 높아요.</p>
             </div>
             <div class="hero-card">
                 <div class="camera-frame">
-                    <div id="webcam-container" class="webcam"></div>
+                    <div id="preview" class="preview">사진 미리보기</div>
                     <div class="frame-grid"></div>
                 </div>
                 <div class="status">
@@ -53,7 +49,7 @@
                 <ul>
                     <li>모델: 강아지 vs 고양이 이미지 분류</li>
                     <li>실시간 예측 확률을 시각화</li>
-                    <li>촬영은 브라우저에서만 처리되어 저장되지 않음</li>
+                    <li>업로드 이미지는 브라우저에서만 처리되어 저장되지 않음</li>
                 </ul>
             </div>
         </section>

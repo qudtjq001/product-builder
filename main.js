@@ -1,21 +1,16 @@
 const URL = "https://teachablemachine.withgoogle.com/models/VwOxg_OVI/";
 
 let model;
-let webcam;
 let maxPredictions = 0;
-let isRunning = false;
 
-const startBtn = document.getElementById("start-btn");
-const stopBtn = document.getElementById("stop-btn");
-const webcamContainer = document.getElementById("webcam-container");
+const preview = document.getElementById("preview");
 const labelContainer = document.getElementById("label-container");
 const statusText = document.getElementById("status-text");
 const resultLabel = document.getElementById("result-label");
 const uploadInput = document.getElementById("image-upload");
 
-function setStatus(text, active) {
+function setStatus(text) {
     statusText.textContent = text;
-    statusText.parentElement.classList.toggle("active", active);
 }
 
 function clearLabels() {
@@ -48,121 +43,15 @@ function ensureLabelRows() {
     }
 }
 
-async function init() {
-    if (isRunning) return;
-    try {
-        setStatus("모델 로딩 중...", true);
-        const modelURL = URL + "model.json";
-        const metadataURL = URL + "metadata.json";
-
-        model = await tmImage.load(modelURL, metadataURL);
-        maxPredictions = model.getTotalClasses();
-        ensureLabelRows();
-
-        const flip = true;
-        webcam = new tmImage.Webcam(320, 320, flip);
-        await webcam.setup();
-        await webcam.play();
-
-        webcamContainer.innerHTML = "";
-        webcamContainer.appendChild(webcam.canvas);
-
-        isRunning = true;
-        startBtn.disabled = true;
-        stopBtn.disabled = false;
-        setStatus("촬영 중", true);
-
-        window.requestAnimationFrame(loop);
-    } catch (error) {
-        console.error(error);
-        setStatus("카메라 접근을 허용해 주세요.", false);
-        startBtn.disabled = false;
-        stopBtn.disabled = true;
-    }
+async function loadModelIfNeeded() {
+    if (model) return;
+    setStatus("모델 로딩 중...");
+    const modelURL = URL + "model.json";
+    const metadataURL = URL + "metadata.json";
+    model = await tmImage.load(modelURL, metadataURL);
+    maxPredictions = model.getTotalClasses();
+    ensureLabelRows();
 }
-
-async function loop() {
-    if (!isRunning) return;
-    webcam.update();
-    await predict();
-    window.requestAnimationFrame(loop);
-}
-
-async function predict() {
-    const prediction = await model.predict(webcam.canvas);
-    let top = { className: "", probability: 0 };
-
-    prediction.forEach((item, index) => {
-        if (item.probability > top.probability) {
-            top = item;
-        }
-
-        const row = labelContainer.children[index];
-        if (!row) return;
-        const [nameNode, valueNode] = row.querySelectorAll(".label-row span");
-        const bar = row.querySelector(".progress span");
-        const percent = Math.round(item.probability * 100);
-
-        nameNode.textContent = item.className;
-        valueNode.textContent = `${percent}%`;
-        bar.style.width = `${percent}%`;
-    });
-
-    if (top.className) {
-        resultLabel.textContent = `${top.className} ${Math.round(top.probability * 100)}%`;
-    }
-}
-
-function stop() {
-    if (!isRunning) return;
-    isRunning = false;
-    startBtn.disabled = false;
-    stopBtn.disabled = true;
-    setStatus("대기 중", false);
-    if (webcam) {
-        webcam.stop();
-    }
-}
-
-startBtn.addEventListener("click", init);
-stopBtn.addEventListener("click", stop);
-uploadInput.addEventListener("change", async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    if (!model) {
-        try {
-            setStatus("모델 로딩 중...", true);
-            const modelURL = URL + "model.json";
-            const metadataURL = URL + "metadata.json";
-            model = await tmImage.load(modelURL, metadataURL);
-            maxPredictions = model.getTotalClasses();
-            ensureLabelRows();
-        } catch (error) {
-            console.error(error);
-            setStatus("모델 로딩 실패", false);
-            return;
-        }
-    }
-
-    stop();
-    setStatus("이미지 분석 중...", true);
-    const img = new Image();
-    img.onload = async () => {
-        webcamContainer.innerHTML = "";
-        webcamContainer.appendChild(img);
-        img.style.width = "100%";
-        img.style.height = "auto";
-        await predictImage(img);
-        setStatus("분석 완료", false);
-    };
-    img.onerror = () => {
-        setStatus("이미지를 읽을 수 없습니다.", false);
-    };
-    img.src = URL.createObjectURL(file);
-});
-
-clearLabels();
 
 async function predictImage(imageEl) {
     const prediction = await model.predict(imageEl);
@@ -188,3 +77,35 @@ async function predictImage(imageEl) {
         resultLabel.textContent = `${top.className} ${Math.round(top.probability * 100)}%`;
     }
 }
+
+uploadInput.addEventListener("change", async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    try {
+        await loadModelIfNeeded();
+    } catch (error) {
+        console.error(error);
+        setStatus("모델 로딩 실패");
+        return;
+    }
+
+    setStatus("이미지 분석 중...");
+
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    img.onload = async () => {
+        preview.innerHTML = "";
+        preview.appendChild(img);
+        await predictImage(img);
+        setStatus("분석 완료");
+        URL.revokeObjectURL(objectUrl);
+    };
+    img.onerror = () => {
+        setStatus("이미지를 읽을 수 없습니다.");
+        URL.revokeObjectURL(objectUrl);
+    };
+    img.src = objectUrl;
+});
+
+clearLabels();
