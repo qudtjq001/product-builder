@@ -99,6 +99,24 @@ body {
     border: 1px solid rgba(29, 27, 22, 0.08);
 }
 
+.comments {
+    width: min(1100px, 100%);
+    margin-top: 4.5rem;
+}
+
+.comments-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 2.4rem 2.5rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(29, 27, 22, 0.08);
+}
+
+.comments-card h2 {
+    font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
+    margin: 0 0 1.5rem;
+}
+
 .partner-form {
     display: grid;
     gap: 1.35rem;
@@ -184,6 +202,10 @@ textarea {
     }
 
     .form-card {
+        padding: 2rem 1.6rem;
+    }
+
+    .comments-card {
         padding: 2rem 1.6rem;
     }
 }
