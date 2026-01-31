@@ -8,6 +8,9 @@ const labelContainer = document.getElementById("label-container");
 const statusText = document.getElementById("status-text");
 const resultLabel = document.getElementById("result-label");
 const uploadInput = document.getElementById("image-upload");
+const themeToggle = document.getElementById("theme-toggle");
+const lottoButton = document.getElementById("lotto-button");
+const lottoNumbers = document.getElementById("lotto-numbers");
 
 function setStatus(text) {
     statusText.textContent = text;
@@ -109,3 +112,56 @@ uploadInput.addEventListener("change", async (event) => {
 });
 
 clearLabels();
+
+function setTheme(mode) {
+    if (mode === "dark") {
+        document.body.setAttribute("data-theme", "dark");
+        themeToggle.setAttribute("aria-pressed", "true");
+        themeToggle.textContent = "라이트 모드";
+        localStorage.setItem("theme", "dark");
+        return;
+    }
+
+    document.body.removeAttribute("data-theme");
+    themeToggle.setAttribute("aria-pressed", "false");
+    themeToggle.textContent = "다크 모드";
+    localStorage.setItem("theme", "light");
+}
+
+if (themeToggle) {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme === "dark") {
+        setTheme("dark");
+    }
+
+    themeToggle.addEventListener("click", () => {
+        const isDark = document.body.getAttribute("data-theme") === "dark";
+        setTheme(isDark ? "light" : "dark");
+    });
+}
+
+function generateLottoNumbers() {
+    const picks = new Set();
+    while (picks.size < 6) {
+        picks.add(Math.floor(Math.random() * 45) + 1);
+    }
+    return Array.from(picks).sort((a, b) => a - b);
+}
+
+function renderLottoNumbers(numbers) {
+    if (!lottoNumbers) return;
+    lottoNumbers.innerHTML = "";
+    numbers.forEach((num) => {
+        const ball = document.createElement("span");
+        ball.className = "lotto-ball";
+        ball.textContent = String(num);
+        lottoNumbers.appendChild(ball);
+    });
+}
+
+if (lottoButton) {
+    lottoButton.addEventListener("click", () => {
+        const numbers = generateLottoNumbers();
+        renderLottoNumbers(numbers);
+    });
+}
