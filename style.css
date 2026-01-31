@@ -27,8 +27,49 @@ body {
     min-height: 100vh;
 }
 
+.top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.1rem 7vw;
+    background: rgba(247, 241, 232, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(29, 26, 21, 0.08);
+}
+
+.logo {
+    font-family: "Alfa Slab One", "Space Grotesk", sans-serif;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: var(--ink);
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-weight: 600;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    padding-bottom: 0.2rem;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+    color: var(--ink);
+    border-color: var(--accent);
+}
+
 .page {
-    padding: 6vh 7vw 10vh;
+    padding: 4vh 7vw 10vh;
     display: grid;
     gap: 4.5rem;
 }
@@ -242,7 +283,103 @@ body {
     line-height: 1.6;
 }
 
+.section-head h2 {
+    margin: 0 0 0.6rem;
+    font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+}
+
+.section-head p {
+    margin: 0;
+    color: var(--muted);
+    max-width: 720px;
+    line-height: 1.6;
+}
+
+.info-grid,
+.policy-grid {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.6rem;
+}
+
+.info-tile,
+.policy-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 1.8rem;
+    border: 1px solid rgba(29, 26, 21, 0.08);
+    box-shadow: var(--shadow);
+}
+
+.info-tile h3,
+.policy-card h3 {
+    margin-top: 0;
+}
+
+.info-tile p,
+.policy-card p {
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.info-tile ul {
+    padding-left: 1.2rem;
+    margin: 1rem 0 0;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.site-footer {
+    padding: 3.5rem 7vw 3rem;
+    background: #1d1a15;
+    color: #f6f1e9;
+    display: grid;
+    gap: 1.4rem;
+}
+
+.site-footer h3 {
+    margin: 0 0 0.6rem;
+}
+
+.contact-note {
+    font-weight: 600;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-links a {
+    color: rgba(246, 241, 233, 0.8);
+    text-decoration: none;
+}
+
+.footer-links a:hover,
+.footer-links a:focus {
+    color: #ffffff;
+}
+
+.copyright {
+    margin: 0;
+    color: rgba(246, 241, 233, 0.7);
+    font-size: 0.85rem;
+}
+
 @media (max-width: 720px) {
+    .top-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem 6vw;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
     .page {
         padding: 5vh 6vw 8vh;
     }
