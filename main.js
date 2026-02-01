@@ -12,16 +12,21 @@ const themeToggle = document.getElementById("theme-toggle");
 const lottoButton = document.getElementById("lotto-button");
 const lottoNumbers = document.getElementById("lotto-numbers");
 
+const hasTestSection = Boolean(preview && labelContainer && statusText && resultLabel && uploadInput);
+
 function setStatus(text) {
+    if (!statusText) return;
     statusText.textContent = text;
 }
 
 function clearLabels() {
+    if (!labelContainer || !resultLabel) return;
     labelContainer.innerHTML = "";
     resultLabel.textContent = "-";
 }
 
 function ensureLabelRows() {
+    if (!labelContainer) return;
     labelContainer.innerHTML = "";
     for (let i = 0; i < maxPredictions; i += 1) {
         const row = document.createElement("div");
@@ -65,7 +70,7 @@ async function predictImage(imageEl) {
             top = item;
         }
 
-        const row = labelContainer.children[index];
+        const row = labelContainer ? labelContainer.children[index] : null;
         if (!row) return;
         const [nameNode, valueNode] = row.querySelectorAll(".label-row span");
         const bar = row.querySelector(".progress span");
@@ -81,37 +86,39 @@ async function predictImage(imageEl) {
     }
 }
 
-uploadInput.addEventListener("change", async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
+if (hasTestSection) {
+    uploadInput.addEventListener("change", async (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
 
-    try {
-        await loadModelIfNeeded();
-    } catch (error) {
-        console.error(error);
-        setStatus("모델 로딩 실패");
-        return;
-    }
+        try {
+            await loadModelIfNeeded();
+        } catch (error) {
+            console.error(error);
+            setStatus("모델 로딩 실패");
+            return;
+        }
 
-    setStatus("이미지 분석 중...");
+        setStatus("이미지 분석 중...");
 
-    const img = new Image();
-    const objectUrl = URL.createObjectURL(file);
-    img.onload = async () => {
-        preview.innerHTML = "";
-        preview.appendChild(img);
-        await predictImage(img);
-        setStatus("분석 완료");
-        URL.revokeObjectURL(objectUrl);
-    };
-    img.onerror = () => {
-        setStatus("이미지를 읽을 수 없습니다.");
-        URL.revokeObjectURL(objectUrl);
-    };
-    img.src = objectUrl;
-});
+        const img = new Image();
+        const objectUrl = URL.createObjectURL(file);
+        img.onload = async () => {
+            preview.innerHTML = "";
+            preview.appendChild(img);
+            await predictImage(img);
+            setStatus("분석 완료");
+            URL.revokeObjectURL(objectUrl);
+        };
+        img.onerror = () => {
+            setStatus("이미지를 읽을 수 없습니다.");
+            URL.revokeObjectURL(objectUrl);
+        };
+        img.src = objectUrl;
+    });
 
-clearLabels();
+    clearLabels();
+}
 
 function setTheme(mode) {
     if (mode === "dark") {

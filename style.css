@@ -418,6 +418,72 @@ body[data-theme="dark"] .theme-toggle {
     line-height: 1.6;
 }
 
+.hero-note {
+    margin-top: 1.4rem;
+    padding: 1rem 1.2rem;
+    border-radius: 16px;
+    background: rgba(47, 167, 255, 0.12);
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.faq-grid {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.4rem;
+}
+
+.faq-item {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 1.6rem;
+    border: 1px solid rgba(29, 26, 21, 0.08);
+    box-shadow: var(--shadow);
+}
+
+.faq-item h3 {
+    margin-top: 0;
+}
+
+.faq-item p {
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.section-cta {
+    margin-top: 1.8rem;
+}
+
+.cta-link,
+.inline-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--accent-dark);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.cta-link:hover,
+.cta-link:focus,
+.inline-link:hover,
+.inline-link:focus {
+    color: var(--accent);
+}
+
+.operator-card {
+    margin-top: 2rem;
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 2rem;
+    border: 1px solid rgba(29, 26, 21, 0.08);
+    box-shadow: var(--shadow);
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
 .site-footer {
     padding: 3.5rem 7vw 3rem;
     background: #1d1a15;
@@ -432,6 +498,12 @@ body[data-theme="dark"] .theme-toggle {
 
 .contact-note {
     font-weight: 600;
+}
+
+.footer-note {
+    margin: 0.6rem 0 0;
+    color: rgba(246, 241, 233, 0.7);
+    font-size: 0.85rem;
 }
 
 .footer-links {
@@ -454,6 +526,61 @@ body[data-theme="dark"] .theme-toggle {
     margin: 0;
     color: rgba(246, 241, 233, 0.7);
     font-size: 0.85rem;
+}
+
+.doc-page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 4vh 7vw 10vh;
+    display: grid;
+    gap: 2.5rem;
+}
+
+.doc-hero {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    border: 1px solid rgba(29, 26, 21, 0.08);
+    box-shadow: var(--shadow);
+}
+
+.doc-hero h1 {
+    margin-top: 0;
+    font-family: "Alfa Slab One", "Space Grotesk", sans-serif;
+}
+
+.doc-meta {
+    margin-top: 0.8rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.doc-section {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 2rem;
+    border: 1px solid rgba(29, 26, 21, 0.08);
+    box-shadow: var(--shadow);
+}
+
+.doc-section h2 {
+    margin-top: 0;
+}
+
+.doc-section p,
+.doc-section li {
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.doc-list {
+    padding-left: 1.2rem;
+}
+
+.doc-grid {
+    display: grid;
+    gap: 1.6rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 @media (max-width: 720px) {

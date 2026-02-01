@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-adsense-account" content="ca-pub-7256543157771009">
+    <meta name="description" content="사진을 업로드하면 강아지상 vs 고양이상을 분석해주는 동물상 테스트. 사용 가이드, 신뢰 기준, 개인정보 및 이용 정책을 투명하게 공개합니다.">
     <title>동물상 테스트 | 강아지 vs 고양이</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,13 +14,16 @@
 </head>
 <body>
     <nav class="top-nav">
-        <a class="logo" href="#top">동물상 테스트</a>
+        <a class="logo" href="index.html">동물상 테스트</a>
         <div class="nav-links">
             <a href="#test">테스트</a>
-            <a href="#results">결과</a>
-            <a href="#lotto">로또 추천</a>
-            <a href="#quality">신뢰 기준</a>
-            <a href="#policies">정책</a>
+            <a href="#method">작동 원리</a>
+            <a href="#trust">신뢰 기준</a>
+            <a href="lotto.html">로또 추천</a>
+            <a href="#faq">FAQ</a>
+            <a href="about.html">소개</a>
+            <a href="privacy.html">개인정보</a>
+            <a href="terms.html">이용약관</a>
             <a href="#contact">문의</a>
         </div>
         <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">다크 모드</button>
@@ -30,13 +34,13 @@
             <div class="hero-text">
                 <span class="badge">Teachable Machine</span>
                 <h1>동물상 테스트</h1>
-                <p class="subtitle">사진을 업로드하면 강아지상 vs 고양이상을 바로 분석해요.</p>
+                <p class="subtitle">사진을 업로드하면 강아지상 vs 고양이상을 바로 분석해요. 결과는 오락·참고용으로 제공되며, 민감한 판단이나 의사결정에 사용하지 않습니다.</p>
                 <div class="upload">
                     <label class="upload-label" for="image-upload">이미지 업로드</label>
                     <input id="image-upload" type="file" accept="image/*">
-                    <span class="upload-note">JPG/PNG 파일을 선택하면 바로 분석합니다.</span>
+                    <span class="upload-note">JPG/PNG 파일을 선택하면 브라우저에서 즉시 분석됩니다.</span>
                 </div>
-                <p class="hint">정면 얼굴이 잘 보이는 사진일수록 정확도가 높아요.</p>
+                <p class="hint">정면 얼굴이 잘 보이는 사진일수록 정확도가 높아요. 흐린 사진·과도한 보정은 예측 정확도를 낮출 수 있어요.</p>
             </div>
             <div class="hero-card">
                 <div class="camera-frame">
@@ -46,6 +50,9 @@
                 <div class="status">
                     <span id="status-text">대기 중</span>
                     <div class="pulse" aria-hidden="true"></div>
+                </div>
+                <div class="hero-note">
+                    <p>업로드한 이미지는 서버로 전송되지 않으며, 브라우저에서만 처리됩니다.</p>
                 </div>
             </div>
         </header>
@@ -65,30 +72,57 @@
                     <li>모델: 강아지 vs 고양이 이미지 분류</li>
                     <li>실시간 예측 확률을 시각화</li>
                     <li>업로드 이미지는 브라우저에서만 처리되어 저장되지 않음</li>
+                    <li>모델과 라이브러리는 공개된 기준에 따라 업데이트 가능</li>
                 </ul>
             </div>
         </section>
 
-        <section class="lotto" id="lotto">
+        <section class="method" id="method">
             <div class="section-head">
-                <h2>로또 번호 자동 추천</h2>
-                <p>1~45 사이의 숫자 중 중복 없이 6개를 랜덤으로 추천합니다.</p>
+                <h2>작동 원리</h2>
+                <p>투명한 설명과 기대치 관리를 위해, 모델의 동작 방식과 한계를 상세히 공개합니다.</p>
             </div>
-            <div class="lotto-card">
-                <div class="lotto-numbers" id="lotto-numbers" aria-live="polite">
-                    <span class="lotto-ball">-</span>
-                    <span class="lotto-ball">-</span>
-                    <span class="lotto-ball">-</span>
-                    <span class="lotto-ball">-</span>
-                    <span class="lotto-ball">-</span>
-                    <span class="lotto-ball">-</span>
-                </div>
-                <button class="lotto-button" id="lotto-button" type="button">번호 추천 받기</button>
-                <p class="lotto-note">본 추천은 무작위이며 당첨을 보장하지 않습니다.</p>
+            <div class="info-grid">
+                <article class="info-tile">
+                    <h3>1. 업로드</h3>
+                    <p>사용자가 선택한 이미지 파일은 브라우저 메모리에서만 처리됩니다. 서버로 전송하거나 저장하지 않습니다.</p>
+                    <ul>
+                        <li>지원 포맷: JPG, PNG</li>
+                        <li>권장 해상도: 512px 이상</li>
+                        <li>얼굴이 프레임 중앙에 위치</li>
+                    </ul>
+                </article>
+                <article class="info-tile">
+                    <h3>2. 모델 추론</h3>
+                    <p>Teachable Machine 기반 이미지 분류 모델을 사용해 강아지상/고양이상 확률을 계산합니다.</p>
+                    <ul>
+                        <li>확률 기반 결과 제공</li>
+                        <li>예측값은 절대적 진단이 아님</li>
+                        <li>광원·각도·표정에 민감</li>
+                    </ul>
+                </article>
+                <article class="info-tile">
+                    <h3>3. 결과 표시</h3>
+                    <p>확률 값을 시각적으로 표시하고, 최상위 클래스를 강조합니다. 모든 결과는 참고용입니다.</p>
+                    <ul>
+                        <li>실시간 막대 그래프</li>
+                        <li>즉시 확인 가능</li>
+                        <li>결과 저장 기능 없음</li>
+                    </ul>
+                </article>
+                <article class="info-tile">
+                    <h3>4. 책임 있는 사용</h3>
+                    <p>이 서비스는 오락 목적이며, 외모 평가나 차별적 용도로 사용하지 않습니다.</p>
+                    <ul>
+                        <li>민감 정보 판단 금지</li>
+                        <li>연령·성별 추정 기능 없음</li>
+                        <li>유해 콘텐츠 업로드 금지</li>
+                    </ul>
+                </article>
             </div>
         </section>
 
-        <section class="quality" id="quality">
+        <section class="quality" id="trust">
             <div class="section-head">
                 <h2>고품질 콘텐츠 & 신뢰 기준</h2>
                 <p>사용자 경험을 우선으로, 명확한 설명과 투명한 운영 원칙을 제공합니다.</p>
@@ -133,6 +167,34 @@
             </div>
         </section>
 
+        <section class="faq" id="faq">
+            <div class="section-head">
+                <h2>FAQ 요약</h2>
+                <p>자주 묻는 질문을 미리 확인하고, 자세한 답변은 FAQ 페이지에서 확인하세요.</p>
+            </div>
+            <div class="faq-grid">
+                <article class="faq-item">
+                    <h3>업로드한 사진이 저장되나요?</h3>
+                    <p>아니요. 이미지는 브라우저에서만 처리되며 서버로 전송되거나 저장되지 않습니다.</p>
+                </article>
+                <article class="faq-item">
+                    <h3>결과가 바뀌는 이유는 무엇인가요?</h3>
+                    <p>조명, 각도, 표정, 해상도에 따라 모델이 인식하는 특징이 달라질 수 있습니다.</p>
+                </article>
+                <article class="faq-item">
+                    <h3>모델은 어떻게 학습되었나요?</h3>
+                    <p>공개된 Teachable Machine 도구를 기반으로 이미지 분류 모델을 구성했습니다.</p>
+                </article>
+                <article class="faq-item">
+                    <h3>광고가 표시되나요?</h3>
+                    <p>서비스 유지 비용을 위해 Google 광고가 표시될 수 있습니다. 자세한 내용은 개인정보 페이지를 참고하세요.</p>
+                </article>
+            </div>
+            <div class="section-cta">
+                <a class="cta-link" href="faq.html">FAQ 전체 보기</a>
+            </div>
+        </section>
+
         <section class="policies" id="policies">
             <div class="section-head">
                 <h2>정책 안내</h2>
@@ -142,13 +204,36 @@
                 <article class="policy-card">
                     <h3>개인정보 처리 안내</h3>
                     <p>본 서비스는 업로드한 이미지를 서버로 전송하지 않습니다. 분석은 브라우저에서만 수행되며, 업로드 이미지는 저장하지 않습니다.</p>
-                    <p>외부 모델과 라이브러리는 CDN을 통해 로드됩니다. 네트워크 요청은 모델 로딩 및 라이브러리 제공에 한정됩니다.</p>
+                    <p>광고 게재를 위해 쿠키 또는 기기 식별자가 사용될 수 있으며, 자세한 사항은 개인정보 처리방침을 확인해 주세요.</p>
+                    <a class="inline-link" href="privacy.html">개인정보 처리방침 전문</a>
                 </article>
                 <article class="policy-card">
                     <h3>이용 약관 요약</h3>
                     <p>본 서비스는 오락 및 참고용입니다. 제공되는 결과는 절대적인 사실로 간주되지 않으며, 사용자가 결과를 해석·활용하는 데 따른 책임은 사용자에게 있습니다.</p>
                     <p>서비스 품질 개선을 위해 내용과 UI는 예고 없이 변경될 수 있습니다.</p>
+                    <a class="inline-link" href="terms.html">이용약관 전문</a>
                 </article>
+            </div>
+        </section>
+
+        <section class="operator" id="operator">
+            <div class="section-head">
+                <h2>운영 정보</h2>
+                <p>투명한 운영을 위해 기본 정보를 공개합니다. 문의는 이메일로 접수됩니다.</p>
+            </div>
+            <div class="operator-card">
+                <div>
+                    <h3>운영 주체</h3>
+                    <p>개인 프로젝트 운영 (브랜드명: Animal Face Test)</p>
+                </div>
+                <div>
+                    <h3>문의 이메일</h3>
+                    <p class="contact-note">contact@yourdomain.com</p>
+                </div>
+                <div>
+                    <h3>마지막 업데이트</h3>
+                    <p>2026-02-01</p>
+                </div>
             </div>
         </section>
     </main>
@@ -158,11 +243,13 @@
             <h3>문의</h3>
             <p>운영 관련 문의는 아래 이메일로 보내주세요.</p>
             <p class="contact-note">contact@yourdomain.com</p>
+            <p class="footer-note">본 사이트는 Google 광고가 표시될 수 있습니다.</p>
         </div>
         <div class="footer-links">
-            <a href="#lotto">로또 추천</a>
-            <a href="#quality">신뢰 기준</a>
-            <a href="#policies">정책 안내</a>
+            <a href="faq.html">FAQ</a>
+            <a href="about.html">소개</a>
+            <a href="privacy.html">개인정보 처리방침</a>
+            <a href="terms.html">이용약관</a>
             <a href="#test">테스트로 이동</a>
         </div>
         <p class="copyright">© 2026 Animal Face Test. All rights reserved.</p>
