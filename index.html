@@ -48,11 +48,72 @@
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "동물상 테스트",
-  "url": "https://product-builder-b54.pages.dev/",
-  "description": "강아지상 vs 고양이상을 사진으로 분석하는 동물상 테스트",
-  "inLanguage": "ko"
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://product-builder-b54.pages.dev/#organization",
+      "name": "동물상 테스트",
+      "url": "https://product-builder-b54.pages.dev/",
+      "email": "contact@yourdomain.com",
+      "logo": "https://product-builder-b54.pages.dev/favicon-20260206-v2.svg"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://product-builder-b54.pages.dev/#website",
+      "name": "동물상 테스트",
+      "url": "https://product-builder-b54.pages.dev/",
+      "description": "강아지상 vs 고양이상을 사진으로 분석하는 동물상 테스트",
+      "inLanguage": "ko",
+      "publisher": {
+        "@id": "https://product-builder-b54.pages.dev/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://product-builder-b54.pages.dev/#webpage",
+      "url": "https://product-builder-b54.pages.dev/",
+      "name": "동물상 테스트 | 강아지 vs 고양이",
+      "description": "사진을 업로드하면 강아지상 vs 고양이상을 분석해주는 동물상 테스트. 사용 가이드, 신뢰 기준, 개인정보 및 이용 정책을 투명하게 공개합니다.",
+      "inLanguage": "ko",
+      "isPartOf": {
+        "@id": "https://product-builder-b54.pages.dev/#website"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://product-builder-b54.pages.dev/og-image.svg",
+        "caption": "동물상 테스트 - 강아지상 vs 고양이상"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "동물상 테스트"
+        },
+        {
+          "@type": "Thing",
+          "name": "강아지상"
+        },
+        {
+          "@type": "Thing",
+          "name": "고양이상"
+        }
+      ],
+      "datePublished": "2026-02-01",
+      "dateModified": "2026-02-06"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "동물상 테스트",
+      "applicationCategory": "EntertainmentApplication",
+      "operatingSystem": "Web",
+      "url": "https://product-builder-b54.pages.dev/",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW"
+      }
+    }
+  ]
 }
     </script>
 </head>
@@ -62,6 +123,7 @@
         <div class="nav-links">
             <a href="#test">테스트</a>
             <a href="#method">작동 원리</a>
+            <a href="#geo">AI 요약</a>
             <a href="#trust">신뢰 기준</a>
             <a href="lotto.html">로또 추천</a>
             <a href="#faq">FAQ</a>
@@ -79,6 +141,7 @@
                 <span class="badge">Teachable Machine</span>
                 <h1>동물상 테스트</h1>
                 <p class="subtitle">사진을 업로드하면 강아지상 vs 고양이상을 바로 분석해요. 결과는 오락·참고용으로 제공되며, 민감한 판단이나 의사결정에 사용하지 않습니다.</p>
+                <p class="doc-meta">마지막 업데이트: 2026-02-06</p>
                 <div class="upload">
                     <label class="upload-label" for="image-upload">이미지 업로드</label>
                     <input id="image-upload" type="file" accept="image/*">
@@ -118,6 +181,73 @@
                     <li>업로드 이미지는 브라우저에서만 처리되어 저장되지 않음</li>
                     <li>모델과 라이브러리는 공개된 기준에 따라 업데이트 가능</li>
                 </ul>
+            </div>
+        </section>
+
+        <section class="method" id="geo">
+            <div class="section-head">
+                <h2>AI 검색을 위한 핵심 요약</h2>
+                <p>이 페이지는 동물상 테스트의 목적, 사용 방법, 개인정보 처리, 한계와 주의사항을 한눈에 확인할 수 있도록 정리했습니다.</p>
+            </div>
+            <div class="info-grid">
+                <article class="info-tile">
+                    <h3>이 서비스는 무엇인가요?</h3>
+                    <p>사진 기반으로 강아지상/고양이상 유사도를 보여주는 브라우저 데모입니다. 결과는 오락용이며 정확한 진단이 아닙니다.</p>
+                    <ul>
+                        <li>사용자 사진을 서버로 전송하지 않음</li>
+                        <li>브라우저에서만 추론</li>
+                        <li>결과 저장 기능 없음</li>
+                    </ul>
+                </article>
+                <article class="info-tile">
+                    <h3>어떻게 쓰나요?</h3>
+                    <p>정면 얼굴이 잘 보이는 사진을 업로드하면 즉시 결과를 확인할 수 있습니다.</p>
+                    <ul>
+                        <li>추천 포맷: JPG, PNG</li>
+                        <li>밝은 조명 환경 권장</li>
+                        <li>과도한 필터는 비권장</li>
+                    </ul>
+                </article>
+                <article class="info-tile">
+                    <h3>한계와 주의사항</h3>
+                    <p>조명, 각도, 표정에 따라 결과가 달라질 수 있으며, 민감한 판단에 사용하지 않습니다.</p>
+                    <ul>
+                        <li>정확도 100% 보장 불가</li>
+                        <li>차별적·혐오 용도 금지</li>
+                        <li>의료·법률 판단 금지</li>
+                    </ul>
+                </article>
+                <article class="info-tile">
+                    <h3>개인정보 처리</h3>
+                    <p>업로드한 이미지는 브라우저 메모리에서만 처리되고 저장되지 않습니다.</p>
+                    <ul>
+                        <li>서버 업로드 없음</li>
+                        <li>결과 저장 없음</li>
+                        <li>자세한 내용은 개인정보 처리방침 참조</li>
+                    </ul>
+                </article>
+            </div>
+            <div class="section-head section-cta" id="faq">
+                <h3>빠른 질문·답변</h3>
+                <p>AI 검색에서 자주 묻는 질문을 간단하게 정리했습니다.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>무료인가요?</h3>
+                    <p>네. 가입 없이 무료로 이용할 수 있습니다.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>사진이 저장되나요?</h3>
+                    <p>아니요. 사진은 브라우저에서만 처리되고 저장되지 않습니다.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>정확도는 어느 정도인가요?</h3>
+                    <p>환경과 사진 품질에 따라 달라집니다. 오락용으로만 활용해 주세요.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>어떤 기기에서 되나요?</h3>
+                    <p>최신 브라우저를 지원하는 모바일·PC에서 이용 가능합니다.</p>
+                </div>
             </div>
         </section>
 
